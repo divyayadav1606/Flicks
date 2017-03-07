@@ -1,6 +1,7 @@
 package com.dyadav.flicks.adapter;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,17 @@ public class MoviesAdapter extends
         Movies movie = moviesList.get(position);
         holder.movieTitle.setText(movie.getmTitle());
         holder.movieOverview.setText(movie.getmOverview());
-        Picasso.with(context).load(movie.getmPosterPath()).into(holder.movieImage);
+
+        //check for device orientation
+        switch (context.getResources().getConfiguration().orientation) {
+            case Configuration.ORIENTATION_PORTRAIT:
+                Picasso.with(context).load(movie.getmPosterPath()).into(holder.movieImage);
+                break;
+            case Configuration.ORIENTATION_LANDSCAPE:
+                Picasso.with(context).load(movie.getmBackdropPath()).into(holder.movieImage);
+                break;
+        }
+
     }
 
     @Override

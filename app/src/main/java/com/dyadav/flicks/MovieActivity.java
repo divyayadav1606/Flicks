@@ -59,4 +59,11 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
     }
+
+    //Save movielist to avoid network fetch on orientation change
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        //savedInstanceState.putStringArrayList("MOVIE_LIST", movie_list);
+    }
 }
