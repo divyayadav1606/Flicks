@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 public class MoviesAdapter extends
         RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
@@ -59,17 +61,32 @@ public class MoviesAdapter extends
         //check for device orientation
         switch (context.getResources().getConfiguration().orientation) {
             case Configuration.ORIENTATION_PORTRAIT:
-                Picasso.with(context).load(movie.getmPosterPath()).into(holder.movieImage);
+                Picasso.with(context).load(movie.getmPosterPath())
+                        .placeholder(R.drawable.placeholer_movie)
+                        .transform(new RoundedCornersTransformation(10, 10))
+                        .into(holder.movieImage);
                 break;
             case Configuration.ORIENTATION_LANDSCAPE:
-                Picasso.with(context).load(movie.getmBackdropPath()).into(holder.movieImage);
+                Picasso.with(context).load(movie.getmBackdropPath())
+                        .placeholder(R.drawable.placeholer_movie_land)
+                        .transform(new RoundedCornersTransformation(10, 10))
+                        .into(holder.movieImage);
                 break;
         }
-
     }
 
     @Override
     public int getItemCount() {
         return moviesList.size();
+    }
+
+    public void clear() {
+        moviesList.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(ArrayList<Movies> list) {
+        moviesList.addAll(list);
+        notifyDataSetChanged();
     }
 }

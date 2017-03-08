@@ -54,7 +54,7 @@ public class Movies {
     }
 
     public String getmPosterPath() {
-        return String.format("https://image.tmdb.org/t/p/w342%s", mPosterPath);
+        return String.format("https://image.tmdb.org/t/p/w500%s", mPosterPath);
     }
 
     public String getmOverview() {
@@ -66,7 +66,7 @@ public class Movies {
     }
 
     public String getmBackdropPath() {
-        return String.format("https://image.tmdb.org/t/p/w342%s", mBackdropPath);
+        return String.format("https://image.tmdb.org/t/p/w780%s", mBackdropPath);
     }
 
     public double getmPopularity() {
