@@ -85,6 +85,6 @@ public class MovieActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        //savedInstanceState.putStringArrayList("MOVIE_LIST", movie_list);
+        //savedInstanceState.putStringArrayList("MOVIE_LIST", movie_item_regular);
     }
 }

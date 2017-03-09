@@ -66,7 +66,7 @@ public class Movies {
     }
 
     public String getmBackdropPath() {
-        return String.format("https://image.tmdb.org/t/p/w780%s", mBackdropPath);
+        return String.format("https://image.tmdb.org/t/p/w1280%s", mBackdropPath);
     }
 
     public double getmPopularity() {
