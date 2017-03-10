@@ -1,13 +1,16 @@
 package com.dyadav.flicks.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
+import com.dyadav.flicks.ItemClickSupport;
 import com.dyadav.flicks.R;
 import com.dyadav.flicks.adapter.MoviesAdapter;
 import com.dyadav.flicks.model.Movies;
@@ -40,6 +43,15 @@ public class MovieActivity extends AppCompatActivity {
         rView.setAdapter(adapter);
         rView.setItemAnimator(new DefaultItemAnimator());
         rView.setLayoutManager(new LinearLayoutManager(this));
+        ItemClickSupport.addTo(rView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                //Launch Detail Activity
+                Intent intent = new Intent(MovieActivity.this, DetailActivity.class);
+                //intent.putExtra(EXTRA_MESSAGE, message);
+                startActivity(intent);
+            }
+        });
         getmovieList();
 
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
@@ -54,7 +66,6 @@ public class MovieActivity extends AppCompatActivity {
     public void getmovieList() {
         AsyncHttpClient client = new AsyncHttpClient();
 
-        //Get movie list
         String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
         client.get(url, new JsonHttpResponseHandler(){
@@ -79,12 +90,5 @@ public class MovieActivity extends AppCompatActivity {
                 toast.show();
             }
         });
-    }
-
-    //Save movielist to avoid network fetch on orientation change
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        //savedInstanceState.putStringArrayList("MOVIE_LIST", movie_item_regular);
     }
 }
