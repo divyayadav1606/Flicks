@@ -1,4 +1,4 @@
-package com.dyadav.flicks;
+package com.dyadav.flicks.activity;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.dyadav.flicks.R;
 import com.dyadav.flicks.adapter.MoviesAdapter;
 import com.dyadav.flicks.model.Movies;
 import com.loopj.android.http.AsyncHttpClient;
@@ -79,7 +80,6 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
     }
-
 
     //Save movielist to avoid network fetch on orientation change
     @Override

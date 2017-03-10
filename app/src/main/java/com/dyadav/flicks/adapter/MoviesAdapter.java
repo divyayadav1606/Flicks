@@ -1,6 +1,7 @@
 package com.dyadav.flicks.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dyadav.flicks.R;
+import com.dyadav.flicks.activity.YoutubeActivity;
 import com.dyadav.flicks.model.Movies;
 import com.squareup.picasso.Picasso;
 
@@ -65,15 +67,26 @@ public class MoviesAdapter extends
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        Movies movie = moviesList.get(position);
+        final Movies movie = moviesList.get(position);
         if (movie != null) {
             switch (viewHolder.getItemViewType()) {
                 case POPULAR_MOVIE:
                     PopularMovieViewHolder vh1 = (PopularMovieViewHolder) viewHolder;
+
+                    vh1.getMovieTitle().setText(movie.getmTitle());
                     Picasso.with(context).load(movie.getmBackdropPath())
                             .placeholder(R.drawable.placeholer_movie)
                             .transform(new RoundedCornersTransformation(10, 10))
                             .into(vh1.getBackdropImage());
+                    vh1.getPlayButton().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //Open youtube with the first trailer
+                            Intent i = new Intent(context, YoutubeActivity.class);
+                            i.putExtra("id", movie.getmId());
+                            context.startActivity(i);
+                        }
+                    });
                     break;
                 case REGULAR_MOVIE:
                 default: {
