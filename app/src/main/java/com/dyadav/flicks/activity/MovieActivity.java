@@ -48,7 +48,12 @@ public class MovieActivity extends AppCompatActivity {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 //Launch Detail Activity
                 Intent intent = new Intent(MovieActivity.this, DetailActivity.class);
-                //intent.putExtra(EXTRA_MESSAGE, message);
+                //Title,Release date, backdrop, vote average and Overview
+                intent.putExtra("title", movie_list.get(position).getmTitle());
+                intent.putExtra("overview", movie_list.get(position).getmOverview());
+                intent.putExtra("date", movie_list.get(position).getmReleaseDate());
+                intent.putExtra("backdrop", movie_list.get(position).getmBackdropPath());
+                intent.putExtra("rating", movie_list.get(position).getmVoteAverage());
                 startActivity(intent);
             }
         });

@@ -15,14 +15,14 @@ public class Movies {
     private double mPopularity;
     private double mVoteAverage;
     private boolean mIsVideo;
+    private String mReleaseDate;
 
     /** Other fields from movie list not used
         1. adult
-        2. release_date
-        3. genre_ids
-        4. original_title
-        5. original_language
-        6. vote_count
+        2. genre_ids
+        3. original_title
+        4. original_language
+        5. vote_count
      **/
 
     public Movies(JSONObject movieObject) throws JSONException {
@@ -34,6 +34,7 @@ public class Movies {
         mPopularity = movieObject.getDouble("popularity");
         mVoteAverage = movieObject.getDouble("vote_average");
         mIsVideo = movieObject.getBoolean("video");
+        mReleaseDate = movieObject.getString("release_date");
     }
 
     public static ArrayList<Movies> fromJSONArray(JSONArray movieArray) {
@@ -79,5 +80,13 @@ public class Movies {
 
     public boolean ismIsVideo() {
         return mIsVideo;
+    }
+
+    public String getmReleaseDate() {
+        return mReleaseDate;
+    }
+
+    public void setmReleaseDate(String mReleaseDate) {
+        this.mReleaseDate = mReleaseDate;
     }
 }

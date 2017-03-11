@@ -33,6 +33,7 @@ The following **bonus** features are implemented:
 
 The following **additional** features are implemented:
 
+* [x] Coordinator Layout, CollapsingToolbar and Appbar in Detail Activity
 * [x] Use Recyclerview with Cardview
 * [x] Swipe to refresh the movie list
 * [ ] Splash screen
