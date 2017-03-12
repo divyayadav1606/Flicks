@@ -3,6 +3,7 @@ package com.dyadav.flicks.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -40,5 +41,18 @@ public class DetailActivity extends AppCompatActivity {
             RatingBar votes = (RatingBar) findViewById(R.id.ratingBar);
             votes.setRating((float) intent.getDoubleExtra("rating", 0));
         }
+
+        final String movieName = intent.getStringExtra("title");
+        final String movieOverview = intent.getStringExtra("overview");
+        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Checkout " + movieName);
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Overview - " + movieOverview);
+                startActivity(Intent.createChooser(sharingIntent,  "Type"));
+
+            }
+        });
     }
 }
