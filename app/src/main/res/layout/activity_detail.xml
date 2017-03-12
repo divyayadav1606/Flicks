@@ -11,8 +11,10 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="250dp">
+        android:layout_height="250dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingtoolbarlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -60,10 +62,20 @@
             android:layout_height="wrap_content"
             android:padding="10dp">
 
+            <ImageView
+                android:id="@+id/posterImage"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"/>
+
             <TextView
                 android:id="@+id/title"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
+                android:layout_toEndOf="@+id/posterImage"
+                android:layout_toRightOf="@+id/posterImage"
+                android:layout_alignParentTop="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp" />
@@ -75,13 +87,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/title"
+                android:layout_toEndOf="@+id/posterImage"
+                android:layout_toRightOf="@+id/posterImage"
                 android:padding="5dp" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/relesedate"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/posterImage"
+                android:isIndicator="true"
                 android:padding="5dp" />
 
             <TextView

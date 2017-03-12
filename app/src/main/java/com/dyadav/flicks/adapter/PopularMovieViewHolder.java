@@ -8,17 +8,24 @@ import android.widget.TextView;
 
 import com.dyadav.flicks.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class PopularMovieViewHolder extends RecyclerView.ViewHolder {
 
-    private ImageView backdropImage;
-    private TextView movieTitle;
-    private ImageButton playButton;
+    @BindView(R.id.movieImage)
+    ImageView backdropImage;
+
+    @BindView(R.id.movieTitle)
+    TextView movieTitle;
+
+    @BindView(R.id.play)
+    ImageButton playButton;
 
     public PopularMovieViewHolder(View v) {
         super(v);
-        backdropImage = (ImageView) v.findViewById(R.id.movieImage);
-        movieTitle = (TextView) v.findViewById(R.id.movieTitle);
-        playButton = (ImageButton) v.findViewById(R.id.play);
+
+        ButterKnife.bind(this, v);
     }
 
     public ImageView getBackdropImage() {

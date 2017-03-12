@@ -2,7 +2,7 @@
 
 **Flicks** shows the latest movies currently playing in theaters. The app utilizes the Movie Database API to display images and basic information about these movies to the user.
 
-Time spent: **12** hours spent in total
+Time spent: **13** hours spent in total
 
 ## User Stories
 
@@ -27,7 +27,7 @@ The following **bonus** features are implemented:
     * [x] Overlay a play icon for videos that can be played.
     * [x] More popular movies should start a separate activity that plays the video immediately.
     * [x] Less popular videos rely on the detail page should show ratings and a YouTube preview.
-* [ ] Apply the popular [Butterknife annotation library](http://guides.codepath.com/android/Reducing-View-Boilerplate-with-Butterknife) to reduce boilerplate code.
+* [x] Apply the popular [Butterknife annotation library](http://guides.codepath.com/android/Reducing-View-Boilerplate-with-Butterknife) to reduce boilerplate code.
 * [x] Apply rounded corners for the poster or background images using [Picasso transformations](https://guides.codepath.com/android/Displaying-Images-with-the-Picasso-Library#other-transformations)
 * [ ] Replaced android-async-http network client with the popular [OkHttp](http://guides.codepath.com/android/Using-OkHttp) networking libraries.
 
@@ -41,9 +41,8 @@ The following **additional** features are implemented:
 * [ ] Save movie list to avoid network usage when screen is rotated or goes in background
 
 TODO:
-1. Data persistance using Database
-2. Use of fragments and larger screen UI layouts
-3.
+* [x] Data persistance using Database
+* [x] Use of fragments and larger screen UI layouts
 
 ## Video Walkthrough
 

@@ -7,17 +7,25 @@ import android.widget.TextView;
 
 import com.dyadav.flicks.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class RegularMovieViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView title, overview;
-    private ImageView moviePoster;
+    @BindView(R.id.movieTitle)
+    TextView title;
+
+    @BindView(R.id.movieOverview)
+    TextView overview;
+
+    @BindView(R.id.movieImage)
+    ImageView moviePoster;
 
 
     public RegularMovieViewHolder(View v) {
         super(v);
-        title = (TextView) v.findViewById(R.id.movieTitle);
-        overview = (TextView) v.findViewById(R.id.movieOverview);
-        moviePoster = (ImageView) v.findViewById(R.id.movieImage);
+
+        ButterKnife.bind(this, v);
     }
 
     public TextView getTitle() {

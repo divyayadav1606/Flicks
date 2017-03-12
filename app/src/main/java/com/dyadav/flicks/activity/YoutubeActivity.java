@@ -16,10 +16,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 
 public class YoutubeActivity extends YouTubeBaseActivity {
 
+    @BindView(R.id.player)
     YouTubePlayerView youTubePlayerView;
 
     @Override
@@ -29,7 +32,7 @@ public class YoutubeActivity extends YouTubeBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube);
 
-        youTubePlayerView = (YouTubePlayerView) findViewById(R.id.player);
+        ButterKnife.bind(this);
 
         int movieId = intent.getExtras().getInt("id");
 

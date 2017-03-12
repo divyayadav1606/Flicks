@@ -9,16 +9,23 @@ import android.widget.TextView;
 
 import com.dyadav.flicks.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SplashActivity extends AppCompatActivity {
+
+    @BindView(R.id.appname) TextView txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        TextView txt = (TextView) findViewById(R.id.appname);
+        ButterKnife.bind(this);
+
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Carrington.ttf");
         txt.setTypeface(font);
+        txt.setText(R.string.app_name);
 
         new Handler().postDelayed(new Runnable() {
             @Override

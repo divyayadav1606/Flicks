@@ -23,12 +23,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 
 public class MovieActivity extends AppCompatActivity {
 
+    @BindView(R.id.swipeContainer)
+    SwipeRefreshLayout swipeContainer;
+
+    @BindView(R.id.movieList)
+    RecyclerView rView;
+
+
     ArrayList<Movies> movie_list;
-    private SwipeRefreshLayout swipeContainer;
     private MoviesAdapter adapter;
 
     @Override
@@ -36,8 +44,9 @@ public class MovieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
 
+        ButterKnife.bind(this);
+
         //Adapter
-        RecyclerView rView = (RecyclerView) findViewById(R.id.movieList);
         movie_list = new ArrayList<>();
         adapter = new MoviesAdapter(this, movie_list);
         rView.setAdapter(adapter);
@@ -54,12 +63,12 @@ public class MovieActivity extends AppCompatActivity {
                 intent.putExtra("date", movie_list.get(position).getmReleaseDate());
                 intent.putExtra("backdrop", movie_list.get(position).getmBackdropPath());
                 intent.putExtra("rating", movie_list.get(position).getmVoteAverage());
+                intent.putExtra("poster", movie_list.get(position).getmPosterPath());
                 startActivity(intent);
             }
         });
         getmovieList();
 
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
