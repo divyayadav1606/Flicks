@@ -41,14 +41,14 @@ The following **additional** features are implemented:
 * [x] Save movie list to avoid network usage when screen is rotated or goes in background
 
 TODO: IMPROVEMENT (Future)
-* [] Data persistance using Sqlite
-* [] Use of fragments and larger screen UI layouts
+* [ ] Data persistance using Sqlite
+* [ ] Use of fragments and larger screen UI layouts
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/divyayadav1606/Flicks/blob/master/flicks.gif' title='Video Walkthrough' align="center" width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
