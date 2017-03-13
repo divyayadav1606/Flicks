@@ -48,7 +48,7 @@ TODO: IMPROVEMENT (Future)
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/divyayadav1606/Flicks/blob/master/flicks.gif' title='Video Walkthrough' align="center" width='' alt='Video Walkthrough' />
+<img src='https://github.com/divyayadav1606/Flicks/blob/master/flicks1.gif' title='Video Walkthrough' align="center" width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
