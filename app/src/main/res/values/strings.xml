@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Flicks</string>
+    <string name="release_date">Release Date:</string>
+    <string name="share_checkout">Checkout</string>
+    <string name="share_overview">Overview -</string>
+    <string name="error_movie_list">Error getting movie list</string>
+    <string name="error_get_trailers">Error getting trailers</string>
 </resources>

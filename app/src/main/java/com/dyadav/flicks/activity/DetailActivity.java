@@ -57,7 +57,6 @@ public class DetailActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-
         final Movies movie = getIntent().getExtras().getParcelable("Movie");
 
         OkHttpClient client = new OkHttpClient();
@@ -69,7 +68,7 @@ public class DetailActivity extends AppCompatActivity {
 
         title.setText(movie.getmTitle());
 
-        date.setText("Release Date: " + movie.getmReleaseDate());
+        date.setText(getString(R.string.release_date) + movie.getmReleaseDate());
 
         overview.setText(movie.getmOverview());
 
@@ -99,8 +98,8 @@ public class DetailActivity extends AppCompatActivity {
             @Override public void onClick(View v) {
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Checkout " + movie.getmTitle());
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Overview - " + movie.getmOverview());
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.share_checkout) + movie.getmTitle());
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.share_overview) + movie.getmOverview());
                 startActivity(Intent.createChooser(sharingIntent,  "Type"));
 
             }

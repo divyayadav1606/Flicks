@@ -91,7 +91,7 @@ public class MovieActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                Toast toast = Toast.makeText(MovieActivity.this, "Error getting movie list", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(MovieActivity.this, R.string.error_movie_list, Toast.LENGTH_LONG);
                 toast.show();
             }
 

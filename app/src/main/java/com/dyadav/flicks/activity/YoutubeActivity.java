@@ -57,7 +57,7 @@ public class YoutubeActivity extends YouTubeBaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                Toast toast = Toast.makeText(YoutubeActivity.this, "Error getting trailers", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(YoutubeActivity.this, R.string.error_get_trailers, Toast.LENGTH_LONG);
                 toast.show();
             }
 
