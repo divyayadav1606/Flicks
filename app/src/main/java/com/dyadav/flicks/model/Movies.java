@@ -1,12 +1,15 @@
 package com.dyadav.flicks.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Movies {
+public class Movies  implements Parcelable {
     private int mId;
     private String mPosterPath;
     private String mOverview;
@@ -36,6 +39,30 @@ public class Movies {
         mIsVideo = movieObject.getBoolean("video");
         mReleaseDate = movieObject.getString("release_date");
     }
+
+    protected Movies(Parcel in) {
+        mId = in.readInt();
+        mPosterPath = in.readString();
+        mOverview = in.readString();
+        mTitle = in.readString();
+        mBackdropPath = in.readString();
+        mPopularity = in.readDouble();
+        mVoteAverage = in.readDouble();
+        mIsVideo = in.readByte() != 0;
+        mReleaseDate = in.readString();
+    }
+
+    public static final Creator<Movies> CREATOR = new Creator<Movies>() {
+        @Override
+        public Movies createFromParcel(Parcel in) {
+            return new Movies(in);
+        }
+
+        @Override
+        public Movies[] newArray(int size) {
+            return new Movies[size];
+        }
+    };
 
     public static ArrayList<Movies> fromJSONArray(JSONArray movieArray) {
         ArrayList<Movies> movies = new ArrayList<>();
@@ -88,5 +115,23 @@ public class Movies {
 
     public void setmReleaseDate(String mReleaseDate) {
         this.mReleaseDate = mReleaseDate;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(mId);
+        parcel.writeString(mPosterPath);
+        parcel.writeString(mOverview);
+        parcel.writeString(mTitle);
+        parcel.writeString(mBackdropPath);
+        parcel.writeDouble(mPopularity);
+        parcel.writeDouble(mVoteAverage);
+        parcel.writeByte((byte) (mIsVideo ? 1 : 0));
+        parcel.writeString(mReleaseDate);
     }
 }

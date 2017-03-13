@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import com.dyadav.flicks.R;
 import com.dyadav.flicks.activity.YoutubeActivity;
 import com.dyadav.flicks.model.Movies;
+import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+import okhttp3.OkHttpClient;
 
 public class MoviesAdapter extends
         RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -68,13 +70,15 @@ public class MoviesAdapter extends
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         final Movies movie = moviesList.get(position);
+        OkHttpClient client = new OkHttpClient();
+        Picasso picasso = new Picasso.Builder(context).downloader(new OkHttp3Downloader(client)).build();
         if (movie != null) {
             switch (viewHolder.getItemViewType()) {
                 case POPULAR_MOVIE:
                     PopularMovieViewHolder vh1 = (PopularMovieViewHolder) viewHolder;
 
                     vh1.getMovieTitle().setText(movie.getmTitle());
-                    Picasso.with(context).load(movie.getmBackdropPath())
+                    picasso.with(context).load(movie.getmBackdropPath())
                             .placeholder(R.drawable.placeholer_movie)
                             .transform(new RoundedCornersTransformation(10, 10))
                             .into(vh1.getBackdropImage());
@@ -96,13 +100,13 @@ public class MoviesAdapter extends
 
                     switch (context.getResources().getConfiguration().orientation) {
                         case Configuration.ORIENTATION_PORTRAIT:
-                            Picasso.with(context).load(movie.getmPosterPath())
+                            picasso.with(context).load(movie.getmPosterPath())
                                     .placeholder(R.drawable.placeholer_movie)
                                     .transform(new RoundedCornersTransformation(10, 10))
                                     .into(vh2.getMoviePoster());
                             break;
                         case Configuration.ORIENTATION_LANDSCAPE:
-                            Picasso.with(context).load(movie.getmBackdropPath())
+                            picasso.with(context).load(movie.getmBackdropPath())
                                     .placeholder(R.drawable.placeholer_movie_land)
                                     .transform(new RoundedCornersTransformation(10, 10))
                                     .into(vh2.getMoviePoster());

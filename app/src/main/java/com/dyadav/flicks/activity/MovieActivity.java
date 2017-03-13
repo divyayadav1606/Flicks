@@ -14,18 +14,21 @@ import com.dyadav.flicks.ItemClickSupport;
 import com.dyadav.flicks.R;
 import com.dyadav.flicks.adapter.MoviesAdapter;
 import com.dyadav.flicks.model.Movies;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cz.msebera.android.httpclient.Header;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MovieActivity extends AppCompatActivity {
 
@@ -46,8 +49,13 @@ public class MovieActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        if (savedInstanceState != null) {
+            movie_list = savedInstanceState.getParcelableArrayList("Movies");
+        } else {
+            movie_list = new ArrayList<>();
+        }
+
         //Adapter
-        movie_list = new ArrayList<>();
         adapter = new MoviesAdapter(this, movie_list);
         rView.setAdapter(adapter);
         rView.setItemAnimator(new DefaultItemAnimator());
@@ -58,12 +66,8 @@ public class MovieActivity extends AppCompatActivity {
                 //Launch Detail Activity
                 Intent intent = new Intent(MovieActivity.this, DetailActivity.class);
                 //Title,Release date, backdrop, vote average and Overview
-                intent.putExtra("title", movie_list.get(position).getmTitle());
-                intent.putExtra("overview", movie_list.get(position).getmOverview());
-                intent.putExtra("date", movie_list.get(position).getmReleaseDate());
-                intent.putExtra("backdrop", movie_list.get(position).getmBackdropPath());
-                intent.putExtra("rating", movie_list.get(position).getmVoteAverage());
-                intent.putExtra("poster", movie_list.get(position).getmPosterPath());
+                Movies movie = movie_list.get(position);
+                intent.putExtra("Movie", movie);
                 startActivity(intent);
             }
         });
@@ -78,31 +82,45 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     public void getmovieList() {
-        AsyncHttpClient client = new AsyncHttpClient();
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")
+                .build();
 
-        String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
-
-        client.get(url, new JsonHttpResponseHandler(){
+        client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                Toast toast = Toast.makeText(MovieActivity.this, "Error getting movie list", Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
                 try {
-                    JSONArray movieArray = response.getJSONArray("results");
+                    final String responseData = response.body().string();
+                    JSONObject json = new JSONObject(responseData);
+                    final JSONArray movieArray = json.getJSONArray("results");
 
-                    adapter.clear();
-                    adapter.addAll(Movies.fromJSONArray(movieArray));
-
-                    swipeContainer.setRefreshing(false);
+                    MovieActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.clear();
+                            adapter.addAll(Movies.fromJSONArray(movieArray));
+                            swipeContainer.setRefreshing(false);
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Toast toast = Toast.makeText(MovieActivity.this, "Error refreshing", Toast.LENGTH_LONG);
-                toast.show();
-            }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle state) {
+        // Make sure to call the super method so that the states of our views are saved
+        super.onSaveInstanceState(state);
+        state.putParcelableArrayList("Movies", movie_list);
     }
 }

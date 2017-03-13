@@ -29,7 +29,7 @@ The following **bonus** features are implemented:
     * [x] Less popular videos rely on the detail page should show ratings and a YouTube preview.
 * [x] Apply the popular [Butterknife annotation library](http://guides.codepath.com/android/Reducing-View-Boilerplate-with-Butterknife) to reduce boilerplate code.
 * [x] Apply rounded corners for the poster or background images using [Picasso transformations](https://guides.codepath.com/android/Displaying-Images-with-the-Picasso-Library#other-transformations)
-* [ ] Replaced android-async-http network client with the popular [OkHttp](http://guides.codepath.com/android/Using-OkHttp) networking libraries.
+* [x] Replaced android-async-http network client with the popular [OkHttp](http://guides.codepath.com/android/Using-OkHttp) networking libraries.
 
 The following **additional** features are implemented:
 
@@ -38,11 +38,11 @@ The following **additional** features are implemented:
 * [x] Swipe to refresh the movie list
 * [x] Splash screen with custom font
 * [x] Share movie with friends
-* [ ] Save movie list to avoid network usage when screen is rotated or goes in background
+* [x] Save movie list to avoid network usage when screen is rotated or goes in background
 
-TODO:
-* [x] Data persistance using Database
-* [x] Use of fragments and larger screen UI layouts
+TODO: IMPROVEMENT (Future)
+* [] Data persistance using Sqlite
+* [] Use of fragments and larger screen UI layouts
 
 ## Video Walkthrough
 
